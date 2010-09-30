@@ -2,7 +2,7 @@ package Earthquake::EEW::Decoder;
 
 use utf8;
 use vars qw($VERSION);
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 #電文種別
 my %code_type = (
@@ -695,7 +695,6 @@ sub read_data {
         }
         elsif ( $line =~ /([CP][APB]I) ([0-9\s]+)/ ) {
 	    $now_code=$1;
-            $data->{$now_code}->{'name'} = $warn_type{$now_code};
             foreach my $code ( split / /, $2 ) {
                 $data->{$now_code}->{$code}->{'name'} = $ippan_shinou_code{$code};
             }
@@ -705,7 +704,6 @@ sub read_data {
             )
         {
 	    $now_code='EBI';
-            $data->{'EBI'}->{'name'}    = $warn_type{$now_code};
 
             $data->{'EBI'}->{$1}->{'name'}    = $shinou_code{$1};
             $data->{'EBI'}->{$1}->{'shindo1'} = $shindo{$2};
@@ -738,13 +736,16 @@ sub read_data {
     return $data;
 }
 
-1;
 __END__
 # Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
 Earthquake::EEW::Decoder - Perl extension for JMA Earthquake Early Warning data
+
+=head1 VERSION
+
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -788,23 +789,63 @@ Earthquake::EEW::Decoder supported 2 schemes.
 
 =head2 EXPORT
 
-
-=head1 SEE ALSO
-
-緊急地震速報配信資料に関する技術情報
-<lt>http://www.jmbsc.or.jp/hp/online/j-online3.html<gt>
-
 =head1 AUTHOR
 
-skubota <lt>skubota@cpan.org<gt>
+Satoshi KUBOTA, C<< <skubota at cpan.org> >>
 
-=head1 COPYRIGHT AND LICENSE
+=head1 BUGS
 
-Copyright (C) 2009 by skubota
+Please report any bugs or feature requests to C<bug-earthquake-eew-decoder at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Earthquake-EEW-Decoder>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.9 or,
-at your option, any later version of Perl 5 you may have available.
+
+
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Earthquake::EEW::Decoder
+
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Earthquake-EEW-Decoder>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Earthquake-EEW-Decoder>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Earthquake-EEW-Decoder>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Earthquake-EEW-Decoder/>
+
+=back
+
+
+=head1 ACKNOWLEDGEMENTS
+
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010 Satoshi KUBOTA.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
 
 
 =cut
+
+1; # End of Earthquake::EEW::Decoder
