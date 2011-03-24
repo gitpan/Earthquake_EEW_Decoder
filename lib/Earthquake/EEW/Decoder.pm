@@ -2,7 +2,7 @@ package Earthquake::EEW::Decoder;
 
 use utf8;
 use vars qw($VERSION);
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 #電文種別
 my %code_type = (
@@ -58,7 +58,7 @@ my %rk1 = (
     '4' => 'グリッドサーチ法（5 点）',
     '5' =>
         '防災科研システム（4 点以下、または精度情報なし）',
-    '6' => '防災科研システム（5 点以上）〕',
+    '6' => '防災科研システム（5 点以上）',
     '7' => 'EPOS（海域〔観測網外〕）',
     '8' => 'EPOS（内陸〔観測網内〕）',
     '9' => '予備',
@@ -745,7 +745,7 @@ Earthquake::EEW::Decoder - Perl extension for JMA Earthquake Early Warning data
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
@@ -755,25 +755,18 @@ Version 0.02
 
   my $eew = Earthquake::EEW::Decoder->new();
   $data = <<EoF;
-  47 03 00 061004150000 C11
-  061004145930
-  ND20061004145955 NCPN01
-  9762 N336 E1362 040
-  PRC0000/
-  CAI 0000
-  CPI 0000
-  CBI 000
-  PAI 9936 9941 9934 9943 9942
-  PPI 9240 9300 9180 9210 9220 9230 9250 9260 9270 9280 9290
-  9360 9370 9390 9330
-  PBI 462 551 550 461 400 401 432 442 443 450 451 460
-  500 501 510 511 520 521 531 532 535 540 600 601
-  610 630 631 581 611
-  NCP
-      ND20061004145955 NCN001 JD////////////// JN///
-      469 N336 E1362 040 69 6- RK33333 RT1//// RC0////
-  EBI 462 S6-5+ 150030 00 551 S6-5+ 150030 00
-      550 S5+5- 150035 00 461 S5-5- 150035 00
+  37 03 00 110311144702 C11
+  110311144616
+  ND20110311144640 NCN009 JD////////////// JN///
+  288 N381 E1429 010 76 5- RK66444 RT11/// RC0////
+  EBI 222 S5-04 ////// 11 220 S5-04 ////// 11 211 S5-04 ////// 11
+  210 S5-04 144703 10 221 S5-04 144703 10 213 S0404 ////// 11
+  251 S0404 144704 10 250 S0404 144711 10 241 S0404 144715 10
+  212 S0404 144715 10 242 S0404 144715 10 233 S0404 144715 10
+  300 S0404 144721 00 252 S0404 144722 00 240 S0404 144727 00
+  243 S0403 144719 00 231 S0403 144730 00 202 S0403 144732 00
+  372 S0403 144732 00 301 S0403 144733 00 230 S0403 144736 00
+  340 S0403 144739 00 331 S0403 144748 00
   9999=
   EoF
   my $d = $eew->read_data($data);
@@ -837,7 +830,7 @@ L<http://search.cpan.org/dist/Earthquake-EEW-Decoder/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Satoshi KUBOTA.
+Copyright 2011 Satoshi KUBOTA.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
